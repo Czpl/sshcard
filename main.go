@@ -136,7 +136,7 @@ func (m model) View() string {
 		Border(lipgloss.RoundedBorder()).
 		Padding(1, 2)
 
-	s := fmt.Sprintf("\n%s czpl.dev \n\n", m.spinner.View())
+	var s string
 
 	for i, choice := range m.options {
 		cursor := " "
@@ -154,7 +154,7 @@ func (m model) View() string {
 	helpMsg += m.quitStyle.Render("k") + m.quitStyleDark.Render(" up · ")
 	helpMsg += m.quitStyle.Render("spc") + m.quitStyleDark.Render(" select · ")
 	helpMsg += m.quitStyle.Render("q") + m.quitStyleDark.Render(" quit ")
-	content := m.txtStyle.Render(s) + "\n\n" + helpMsg
+	content := fmt.Sprintf("\n%s czpl.dev \n\n", m.spinner.View()) + m.txtStyle.Render(s) + "\n\n" + helpMsg
 
 	boxWidth := lipgloss.Width(content) + 4
 	boxHeight := lipgloss.Height(content) + 2
