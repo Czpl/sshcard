@@ -19,7 +19,7 @@ primary_region = 'waw'
     port = 22
 
 [[vm]]
-  memory = '256mc'
+  memory = '256mb'
   cpu_kind = 'shared'
   cpus = 1
 
