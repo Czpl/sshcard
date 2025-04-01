@@ -10,19 +10,19 @@ primary_region = 'waw'
   [build.args]
     GO_VERSION = '1.24.0'
 
-[env]
-  PORT = '8080'
-
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = 'stop'
+[[services]]
+  internal_port = 23234
+  protocol = "tcp"
+  auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+  [[services.ports]]
+    port = 22
 
 [[vm]]
-  memory = '1gb'
+  memory = '256mc'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 1024
+
+[mounts]
+  source = "ssh_key"
+  destination = ".ssh/id_ed255919"
