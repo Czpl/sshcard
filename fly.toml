@@ -23,6 +23,6 @@ primary_region = 'waw'
   cpu_kind = 'shared'
   cpus = 1
 
-# [mounts]
-  # source = "ssh_key"
-  # destination = ".ssh/id_ed255919"
+[mounts]
+  source = "ssh_key"
+  destination = ".ssh/id_ed255919"
