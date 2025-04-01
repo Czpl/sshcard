@@ -13,7 +13,7 @@ primary_region = 'waw'
 [[services]]
   internal_port = 23234
   protocol = "tcp"
-  auto_stop_machines = true
+  auto_stop_machines = "stop"
   auto_start_machines = true
   [[services.ports]]
     port = 22
