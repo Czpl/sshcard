@@ -10,6 +10,12 @@ RUN go build -v -o /run-app .
 
 FROM debian:bookworm
 
+RUN apt update && apt install -y socat
+
 COPY --from=builder /run-app /usr/local/bin/
-EXPOSE 23234
-CMD ["run-app"]
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 23234 443
+ENTRYPOINT ["/entrypoint.sh"]
