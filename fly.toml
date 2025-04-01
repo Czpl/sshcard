@@ -25,4 +25,4 @@ primary_region = 'waw'
 
 [mounts]
   source = "ssh_key"
-  destination = ".ssh/id_ed255919"
+  destination = "/data"
