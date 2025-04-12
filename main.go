@@ -19,6 +19,7 @@ import (
 	"github.com/charmbracelet/wish/activeterm"
 	"github.com/charmbracelet/wish/bubbletea"
 	"github.com/charmbracelet/wish/logging"
+	"github.com/mitchellh/go-wordwrap"
 )
 
 const (
@@ -145,16 +146,27 @@ func (m model) View() string {
 		}
 
 		checked := " "
+		details := ""
 		if _, ok := m.selected[i]; ok {
 			checked = "x"
+			if m.options[i] == "info" {
+				details = `I'm a senior software engineer who loves to tinker with code across the board. Most of my time goes into building stuff with TypeScript, React, and Next.js, but I also dive into PHP for WordPress plugins when needed.On the side, I mess around with C++ and Go just for fun—keeps things interesting and keeps me learning.`
+			}
+			if m.options[i] == "contact" {
+				details += `cmateusz@protonmail.com`
+			}
 		}
 		s += fmt.Sprintf("%s [%s] %s\n", cursor, checked, choice)
+		if details != "" {
+			wrapped := wordwrap.WrapString(details, uint(m.width-10))
+			s += fmt.Sprintf("\n%s\n\n", wrapped)
+		}
 	}
 	helpMsg := m.quitStyle.Render("j") + m.quitStyleDark.Render(" down · ")
 	helpMsg += m.quitStyle.Render("k") + m.quitStyleDark.Render(" up · ")
 	helpMsg += m.quitStyle.Render("spc") + m.quitStyleDark.Render(" select · ")
 	helpMsg += m.quitStyle.Render("q") + m.quitStyleDark.Render(" quit ")
-	content := fmt.Sprintf("\n%s czpl.dev \n\n", m.spinner.View()) + m.txtStyle.Render(s) + "\n\n" + helpMsg
+	content := fmt.Sprintf("\n%s czpl.dev WIP \n\n", m.spinner.View()) + m.txtStyle.Render(s) + "\n\n" + helpMsg
 
 	boxWidth := lipgloss.Width(content) + 4
 	boxHeight := lipgloss.Height(content) + 2
