@@ -1,0 +1,39 @@
+body {
+	height: 100vh;
+	font-family: monospace;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content {
+	display: flex;
+	position: relative;
+}
+
+.content::after {
+	content: '';
+	display: inline-block;
+	height: 16px;
+	width: 8px;
+	margin-left: 1px;
+	background: red;
+	animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background: #333;
+	}
+
+	.content {
+		color: white;
+	}
+}

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -28,6 +29,15 @@ const (
 )
 
 func main() {
+	go func() {
+		fs := http.FileServer(http.Dir("/app/static"))
+		http.Handle("/", fs)
+		log.Info("Serving static HTML on :80")
+		err := http.ListenAndServe(":80", nil)
+		if err != nil {
+			log.Fatalf("HTTP server failed: %v", err)
+		}
+	}()
 	s, err := wish.NewServer(
 		wish.WithAddress(net.JoinHostPort(host, port)),
 		wish.WithHostKeyPath("/data/key"),

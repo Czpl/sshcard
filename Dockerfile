@@ -9,6 +9,9 @@ RUN go build -v -o /run-app .
 
 FROM debian:bookworm
 
-COPY --from=builder /run-app /usr/local/bin/
-EXPOSE 23234
+RUN mkdir -p /app/static
+COPY --from=builder /run-app /usr/local/bin/run-app
+COPY --from=builder /usr/src/app/static /app/static
+
+EXPOSE 23234 80
 CMD ["run-app"]
